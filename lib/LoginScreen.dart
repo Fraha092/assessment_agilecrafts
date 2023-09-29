@@ -37,17 +37,37 @@ class LoginScreen extends HookConsumerWidget {
               decoration: InputDecoration(hintText: 'Password'),
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () async {
-                await ref.authenticationResponses.authenticationAdapter.LoginAuthentication(
-                    10,
-                    AuthenticationRequest(userNameOrEmailAddress: userNameController.text,
-                        password: passwordController.text)).then((value) =>
+            // ElevatedButton(
+            //   onPressed: () async {
+            //     await ref.authenticationResponses.authenticationAdapter.LoginAuthentication(
+            //         10,
+            //         AuthenticationRequest(userNameOrEmailAddress: userNameController.text,
+            //             password: passwordController.text)).then((value) =>
+            //
+            //     Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductListScreen())));
+            //   },
+            //   child: Text('Login Authentication'),
+            // ),
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductListScreen())));
-              },
-              child: Text('Login Authentication'),
-            ),
+
+        ElevatedButton(
+        onPressed: () async {
+      var response = await ref.authenticationResponses.authenticationAdapter.LoginAuthentication(
+          10,
+          AuthenticationRequest(userNameOrEmailAddress: userNameController.text,
+              password: passwordController.text)
+      );
+
+      if (response!=null) { // Assuming 'isSuccessful' is a property in your response model
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductListScreen()));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Invalid username or password'))
+        );
+      }
+    },
+    child: Text('Login Authentication'),
+    ),
           ],
         ),
       ),
