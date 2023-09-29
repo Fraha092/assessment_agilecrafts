@@ -25,6 +25,12 @@ class ProductListScreen extends ConsumerWidget {
               return ListTile(
                 title: Text(todo.name),
                 subtitle: Text(todo.description),
+                trailing: Checkbox(
+                  value: todo.isAvailable,
+                  onChanged: (newValue) {
+                    newValue=true;
+                  },
+                ),
               );
             },
           );
