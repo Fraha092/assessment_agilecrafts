@@ -18,13 +18,14 @@ class LoginScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Center(child: Text('ToDos')),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Center(child: Text('Login Authentication')),
             TextField(
               controller: userNameController,
               decoration: InputDecoration(hintText: 'Username'),
