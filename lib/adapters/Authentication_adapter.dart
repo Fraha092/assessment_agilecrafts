@@ -18,13 +18,14 @@ mixin AuthenticationAdapter<AuthenticationResponse extends DataModel<Authenticat
       },
       body: json.encode(body.toMap()),
       onSuccess: (data, label) async{
-        print('body:::${data.body}');
+        print('body:::${data.body.toString()}');
 
         final token=(data.body as Map<String, dynamic>)['result']['accessToken'];
-        print('token:::$token');
+       // print('token:::$token');
         SharedPreferences prefs=await SharedPreferences.getInstance();
         prefs.setString('accessToken', token);
         final sc=await deserialize((data.body as Map<String, dynamic>));
+        //print('body of sc:::$sc');
         return sc.model;
       },
       onError: (e, label){

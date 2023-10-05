@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_data/flutter_data.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../adapters/Authentication_adapter.dart';
+import 'TodoModel.dart';
 part 'AuthenticationModel.g.dart';
 
 @JsonSerializable()
@@ -14,6 +17,7 @@ class AuthenticationModel extends DataModel<AuthenticationModel> with EquatableM
   final bool shouldResetPassword;
   final String refreshToken;
   final int refreshTokenExpireInSeconds;
+  late final HasMany<TodoModel> todoModels;
 
   AuthenticationModel({
     required this.userId,
@@ -23,8 +27,9 @@ class AuthenticationModel extends DataModel<AuthenticationModel> with EquatableM
     required this.shouldResetPassword,
     required this.refreshToken,
     required this.refreshTokenExpireInSeconds,
+    HasMany<TodoModel>? todoModels,
 
-});
+}): todoModels= todoModels ?? HasMany();
 
   @override
   Object? get id => userId;
@@ -43,3 +48,5 @@ class AuthenticationModel extends DataModel<AuthenticationModel> with EquatableM
   }
 
 }
+
+//flutter pub run build_runner watch

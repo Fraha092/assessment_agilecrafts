@@ -10,7 +10,15 @@ part of 'AuthenticationModel.dart';
 
 mixin $AuthenticationModelLocalAdapter on LocalAdapter<AuthenticationModel> {
   static final Map<String, RelationshipMeta>
-      _kAuthenticationModelRelationshipMetas = {};
+      _kAuthenticationModelRelationshipMetas = {
+    'todoModels': RelationshipMeta<TodoModel>(
+      name: 'todoModels',
+      inverseName: 'user',
+      type: 'todoModels',
+      kind: 'HasMany',
+      instance: (_) => (_ as AuthenticationModel).todoModels,
+    )
+  };
 
   @override
   Map<String, RelationshipMeta> get relationshipMetas =>
@@ -52,7 +60,15 @@ extension AuthenticationModelDataRepositoryX
     on Repository<AuthenticationModel> {}
 
 extension AuthenticationModelRelationshipGraphNodeX
-    on RelationshipGraphNode<AuthenticationModel> {}
+    on RelationshipGraphNode<AuthenticationModel> {
+  RelationshipGraphNode<TodoModel> get todoModels {
+    final meta = $AuthenticationModelLocalAdapter
+            ._kAuthenticationModelRelationshipMetas['todoModels']
+        as RelationshipMeta<TodoModel>;
+    return meta.clone(
+        parent: this is RelationshipMeta ? this as RelationshipMeta : null);
+  }
+}
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -67,6 +83,10 @@ AuthenticationModel _$AuthenticationModelFromJson(Map<String, dynamic> json) =>
       shouldResetPassword: json['shouldResetPassword'] as bool,
       refreshToken: json['refreshToken'] as String,
       refreshTokenExpireInSeconds: json['refreshTokenExpireInSeconds'] as int,
+      todoModels: json['todoModels'] == null
+          ? null
+          : HasMany<TodoModel>.fromJson(
+              json['todoModels'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AuthenticationModelToJson(
@@ -79,4 +99,5 @@ Map<String, dynamic> _$AuthenticationModelToJson(
       'shouldResetPassword': instance.shouldResetPassword,
       'refreshToken': instance.refreshToken,
       'refreshTokenExpireInSeconds': instance.refreshTokenExpireInSeconds,
+      'todoModels': instance.todoModels,
     };

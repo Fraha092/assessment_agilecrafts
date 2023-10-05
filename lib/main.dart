@@ -1,5 +1,6 @@
 import 'package:assessment/main.data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_data/flutter_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'LoginScreen.dart';
@@ -8,12 +9,14 @@ import 'model/AuthenticationResponse.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(
-    overrides: [configureRepositoryLocalStorage()],
+    overrides: [configureRepositoryLocalStorage(
+      //  clear: LocalStorageClearStrategy.never
+    )],
       child:  MyApp()));
 }
 
 class MyApp extends HookConsumerWidget {
-  const MyApp({super.key});
+ // const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
