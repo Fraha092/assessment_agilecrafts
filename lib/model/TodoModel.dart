@@ -14,7 +14,6 @@ class TodoModel extends DataModel<TodoModel>with EquatableMixin{
   final int? tenantId;
   final String name;
   final String description;
-  //@JsonKey(name: "isAvailable")
   final bool isAvailable;
   late final BelongsTo<AuthenticationModel> user;
 
@@ -29,7 +28,7 @@ class TodoModel extends DataModel<TodoModel>with EquatableMixin{
 
 
   @override
-  List<Object> get props{
+  List<Object?> get props{
     return [
       id ?? 0,
       tenantId ?? 0,

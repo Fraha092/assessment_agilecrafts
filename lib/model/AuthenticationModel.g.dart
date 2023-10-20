@@ -76,11 +76,11 @@ extension AuthenticationModelRelationshipGraphNodeX
 
 AuthenticationModel _$AuthenticationModelFromJson(Map<String, dynamic> json) =>
     AuthenticationModel(
-      userId: json['userId'] as int,
       accessToken: json['accessToken'] as String,
       encryptedAccessToken: json['encryptedAccessToken'] as String,
       expireInSeconds: json['expireInSeconds'] as int,
       shouldResetPassword: json['shouldResetPassword'] as bool,
+      userId: json['userId'] as int,
       refreshToken: json['refreshToken'] as String,
       refreshTokenExpireInSeconds: json['refreshTokenExpireInSeconds'] as int,
       todoModels: json['todoModels'] == null
@@ -92,11 +92,11 @@ AuthenticationModel _$AuthenticationModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$AuthenticationModelToJson(
         AuthenticationModel instance) =>
     <String, dynamic>{
-      'userId': instance.userId,
       'accessToken': instance.accessToken,
       'encryptedAccessToken': instance.encryptedAccessToken,
       'expireInSeconds': instance.expireInSeconds,
       'shouldResetPassword': instance.shouldResetPassword,
+      'userId': instance.userId,
       'refreshToken': instance.refreshToken,
       'refreshTokenExpireInSeconds': instance.refreshTokenExpireInSeconds,
       'todoModels': instance.todoModels,

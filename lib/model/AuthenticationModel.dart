@@ -10,24 +10,24 @@ part 'AuthenticationModel.g.dart';
 @DataRepository([])
 class AuthenticationModel extends DataModel<AuthenticationModel> with EquatableMixin{
 
-  final int userId;
   final String accessToken;
   final String encryptedAccessToken;
   final int expireInSeconds;
   final bool shouldResetPassword;
+  final int userId;
   final String refreshToken;
   final int refreshTokenExpireInSeconds;
   late final HasMany<TodoModel> todoModels;
 
   AuthenticationModel({
-    required this.userId,
     required this.accessToken,
     required this.encryptedAccessToken,
     required this.expireInSeconds,
     required this.shouldResetPassword,
+    required this.userId,
     required this.refreshToken,
     required this.refreshTokenExpireInSeconds,
-    HasMany<TodoModel>? todoModels,
+   HasMany<TodoModel>? todoModels,
 
 }): todoModels= todoModels ?? HasMany();
 
@@ -37,11 +37,11 @@ class AuthenticationModel extends DataModel<AuthenticationModel> with EquatableM
   @override
   List<Object> get props {
     return [
-      userId,
       accessToken,
       encryptedAccessToken,
       expireInSeconds,
       shouldResetPassword,
+      userId,
       refreshToken,
       refreshTokenExpireInSeconds,
     ];

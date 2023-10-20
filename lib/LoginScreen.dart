@@ -66,10 +66,10 @@ class LoginScreen extends HookConsumerWidget {
                       SnackBar(content: Text('Invalid username or password'))
                   );
                 }
-              },
+               },
               child: Text('Login Authentication'),
             ),
-////
+//
     //     ElevatedButton(
     //     onPressed: () async {
     //       try{

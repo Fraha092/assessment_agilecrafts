@@ -40,7 +40,7 @@ class AuthenticationRequest extends Equatable{
 
   @override
   String toString() =>
-      'AuthBody(userNameOrEmailAddress: $userNameOrEmailAddress, password: $password)';
+      'AuthenticationRequest(userNameOrEmailAddress: $userNameOrEmailAddress, password: $password)';
 
   @override
   List<Object> get props => [userNameOrEmailAddress, password];

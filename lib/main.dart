@@ -1,4 +1,5 @@
 import 'package:assessment/main.data.dart';
+import 'package:assessment/model/TodoModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_data/flutter_data.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,7 +11,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(ProviderScope(
     overrides: [configureRepositoryLocalStorage(
-      //  clear: LocalStorageClearStrategy.never
+        clear: LocalStorageClearStrategy.never
     )],
       child:  MyApp()));
 }
@@ -29,15 +30,22 @@ class MyApp extends HookConsumerWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: Center(
-          child: ref.watch(repositoryInitializerProvider).when(
-              data: (_){
-                ref.authenticationResponses.logLevel=2;
-                ref.todoModels.logLevel=2;
-                return LoginScreen();
-              },
-              error: (error,_)=> Text(error.toString()),
-              loading: ()=> CircularProgressIndicator()),
+        body: RefreshIndicator(
+          onRefresh: () async{
+            ref.refresh(repositoryInitializerProvider);
+          },
+          child: Center(
+            child: ref.watch(repositoryInitializerProvider).when(
+                data: (_){
+                  ref.authenticationResponses.logLevel=2;
+                  ref.todoModels.logLevel=2;
+                  //  final label=DataRequestLabel('findAll',type: 'other',requestId: 'ee4dd2',);
+                  //  ref.todoModels.log(label,'testing nested labels', logLevel: 2);
+                  return LoginScreen();
+                },
+                error: (error,stack)=> Text(error.toString()),
+                loading: ()=> Center(child: CircularProgressIndicator())),
+          ),
         ),
       ),
     );
